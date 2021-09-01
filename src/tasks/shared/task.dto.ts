@@ -1,5 +1,4 @@
-export class Task {
-  id: number;
+export class TaskDTO {
   description: string;
   completed: boolean;
 }

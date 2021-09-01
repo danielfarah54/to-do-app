@@ -1,48 +1,39 @@
-import { Task } from './task';
+import { TaskDTO } from './task.dto';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Task } from '../entities/task.entity';
 
 @Injectable()
 export class TaskService {
-  tasks: Task[] = [
-    { id: 1, description: 'Tarefa 1', completed: false },
-    { id: 2, description: 'Tarefa 2', completed: false },
-    { id: 3, description: 'Tarefa 3', completed: false },
-    { id: 4, description: 'Tarefa 4', completed: false },
-  ];
+  constructor(
+    @InjectRepository(Task)
+    private tasksRepository: Repository<Task>,
+  ) {}
 
   getAll() {
-    return this.tasks;
+    return this.tasksRepository.find();
   }
 
-  getById(id: number) {
-    const task = this.tasks.find((value) => value.id == id);
-    return task;
+  getById(id: string) {
+    return this.tasksRepository.findOne(id);
   }
 
-  create(task: Task) {
-    let lastId = 0;
-    if (this.tasks.length > 0) {
-      lastId = this.tasks[this.tasks.length - 1].id;
-    }
+  create(taskDTO: TaskDTO) {
+    const task = new Task();
+    task.description = taskDTO.description;
+    task.completed = taskDTO.completed;
 
-    task.id = lastId + 1;
-    this.tasks.push(task);
-
-    return task;
+    return this.tasksRepository.save(task);
   }
 
-  update(task: Task) {
-    const taskArray = this.getById(task.id);
-    if (taskArray) {
-      taskArray.description = task.description;
-      taskArray.completed = task.completed;
-    }
+  async update(id: string, taskDTO: TaskDTO) {
+    this.tasksRepository.update(id, taskDTO);
 
-    return taskArray;
+    return this.tasksRepository.findOne(id);
   }
 
-  delete(id: number) {
-    const index = this.tasks.findIndex((value) => value.id == id);
-    this.tasks.splice(index, 1);
+  delete(id: string) {
+    return this.tasksRepository.delete(id);
   }
 }

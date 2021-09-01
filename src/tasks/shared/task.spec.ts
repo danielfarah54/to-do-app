@@ -1,7 +1,7 @@
-import { Task } from './task';
+import { TaskDTO } from './task.dto';
 
 describe('Task', () => {
   it('should be defined', () => {
-    expect(new Task()).toBeDefined();
+    expect(new TaskDTO()).toBeDefined();
   });
 });
