@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Task } from './../../tasks/entities/task.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -13,4 +15,8 @@ export class User {
 
   @Column()
   password: string;
+
+  // eslint-disable-next-line prettier/prettier
+  @OneToMany(type => Task, task => task.user)
+  tasks: Task[];
 }

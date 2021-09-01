@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { User } from './../../users/entities/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Task {
@@ -10,4 +12,8 @@ export class Task {
 
   @Column({ default: false })
   completed: boolean;
+
+  // eslint-disable-next-line prettier/prettier
+  @ManyToOne(type => User, user => user.tasks)
+  user: string;
 }
