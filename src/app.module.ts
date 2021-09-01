@@ -1,10 +1,13 @@
-import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Task } from './tasks/entities/task.entity';
 import { TasksModule } from './tasks/tasks.module';
+import { User } from './users/entities/user.entity';
+import { UsersModule } from './users/users.module';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -18,10 +21,11 @@ require('dotenv').config();
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
-      entities: [Task],
+      entities: [Task, User],
       synchronize: true,
     }),
     TasksModule,
+    UsersModule,
     ConfigModule.forRoot(),
   ],
   controllers: [AppController],

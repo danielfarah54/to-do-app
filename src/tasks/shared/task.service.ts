@@ -28,7 +28,7 @@ export class TaskService {
   }
 
   async update(id: string, taskDTO: TaskDTO) {
-    this.tasksRepository.update(id, taskDTO);
+    await this.tasksRepository.update(id, taskDTO);
 
     return this.tasksRepository.findOne(id);
   }
