@@ -8,6 +8,7 @@ import { Task } from './tasks/entities/task.entity';
 import { TasksModule } from './tasks/tasks.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -27,6 +28,7 @@ require('dotenv').config();
     TasksModule,
     UsersModule,
     ConfigModule.forRoot(),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
