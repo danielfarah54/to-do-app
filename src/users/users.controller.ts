@@ -20,7 +20,7 @@ export class UsersController {
   }
 
   @Get(':id')
-  async getById(@Param('id') id: string): Promise<UserDTO> {
+  async getById(@Param('id') id: number): Promise<UserDTO> {
     return this.userService.getById(id);
   }
 
@@ -31,14 +31,14 @@ export class UsersController {
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() user: UserDTO,
   ): Promise<UserDTO> {
     return this.userService.update(id, user);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: number) {
     return this.userService.delete(id);
   }
 }

@@ -25,7 +25,7 @@ export class TasksController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async getById(@Param('id') id: string): Promise<TaskDTO> {
+  async getById(@Param('id') id: number): Promise<TaskDTO> {
     return this.taskService.getById(id);
   }
 
@@ -38,7 +38,7 @@ export class TasksController {
   @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() task: TaskDTO,
   ): Promise<TaskDTO> {
     return this.taskService.update(id, task);
@@ -46,7 +46,7 @@ export class TasksController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: number) {
     return this.taskService.delete(id);
   }
 }

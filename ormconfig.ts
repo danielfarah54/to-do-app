@@ -1,4 +1,6 @@
-import path from 'path';
+import * as path from 'path';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 const options = {
   type: 'mysql',
@@ -7,8 +9,8 @@ const options = {
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
   database: process.env.TYPEORM_DATABASE,
-  entities: [path.resolve(__dirname, '..', 'db', 'models', '*')],
-  migrations: [path.resolve(__dirname, '..', 'db', 'migrations', '*')],
+  entities: [path.resolve(__dirname, 'src', 'db', 'models', '*')],
+  migrations: [path.resolve(__dirname, 'src', 'db', 'migrations', '*')],
   synchronize: true,
   logging: true,
 };

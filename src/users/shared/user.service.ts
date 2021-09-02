@@ -1,7 +1,7 @@
 import { UserDTO } from './user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
-import { User } from '../entities/user.entity';
+import { User } from '../../db/models/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  getById(id: string) {
+  getById(id: number) {
     return this.userRepository.findOne(id);
   }
 
@@ -31,13 +31,13 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  async update(id: string, userDTO: UserDTO) {
+  async update(id: number, userDTO: UserDTO) {
     await this.userRepository.update(id, userDTO);
 
     return this.userRepository.findOne(id);
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.userRepository.delete(id);
   }
 }
