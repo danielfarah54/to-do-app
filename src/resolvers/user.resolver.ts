@@ -26,4 +26,17 @@ export default class UserResolver {
     });
     return this.repoService.userRepo.save(user);
   }
+
+  @Mutation(() => User)
+  public async updateUser(
+    @Args('data') input: UserInput,
+    @Args('id') id: number,
+  ): Promise<User> {
+    this.repoService.userRepo.update(id, {
+      name: input.name,
+      email: input.email,
+      password: input.password,
+    });
+    return this.repoService.userRepo.findOne(id);
+  }
 }
